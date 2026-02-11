@@ -1,0 +1,50 @@
+name: Deploy to S3 + CloudFront (Development)
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and Deploy Development
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and Export
+        run: npm run build
+
+      - name: Create robots
+        run: npm run generate:robots
+
+      - name: Configure AWS Credentials (Development)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Upload to S3 (Development)
+        run: aws s3 sync ./out s3://${{ secrets.S3_BUCKET_NAME }} --delete
+
+      - name: List files in S3 bucket
+        run: aws s3 ls s3://${{ secrets.S3_BUCKET_NAME }} --recursive
+
+      - name: Invalidate CloudFront (Development)
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"

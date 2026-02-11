@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+body {
+  font-family: var(--font-chakra-petch), sans-serif;
+  background-color: black;
+  color: white;
+}
+
+.neutron {
+  display: none;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(to left, #ffd200 0%, #ffffff 62%, #ffffff 100%);
+  font-weight: 700;
+
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.path-yellow {
+  fill: #3f3f3f;
+}
+
+.path-logo {
+  opacity: 0;
+}
+
+.minimal-hover-button {
+  background-color: #1a1a1a80;
+  border: 0.42px solid #40404099;
+  border-radius: 4.25px;
+  cursor: pointer;
+
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.minimal-hover-button:hover {
+  background-color: #2a2a2a;
+
+  border-color: #606060;
+}
+
+.minimal-hover-button div {
+  transition: transform 0.3s ease;
+}
+
+.minimal-hover-button:hover div {
+  transform: scale(0.97);
+}
+
+@keyframes flicker-animation {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.2;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.2;
+  }
+}
+
+.animate-custom-flicker {
+  animation: flicker-animation 1.5s infinite;
+}
+
+@keyframes subtle-flicker-animation {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-custom-flicker-subtle {
+  animation: subtle-flicker-animation 2s infinite ease-in-out;
+}
+
+.wider-blur-container {
+  position: relative;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1901px) {
+  .wider-blur-container::before,
+  .wider-blur-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc((100vw - 1970px) / 2);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.05);
+
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid transparent;
+  }
+
+  .wider-blur-container::before {
+    left: 0;
+  }
+
+  .wider-blur-container::after {
+    right: 0;
+  }
+}
+
+/* For most modern browsers */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
