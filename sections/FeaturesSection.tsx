@@ -149,7 +149,7 @@ const FeaturesSection = () => {
   }, []);
 
   return (
-    <section>
+    <section id="docs">
       <div className="mx-auto flex lg:flex-row flex-col h-full md:px-0 px-[20px] md:pt-[112px] pt-[80px] max-w-[1300px]">
         <div className="flex-1 flex justify-center items-start relative">
           <RotatingSphere />

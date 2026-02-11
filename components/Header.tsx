@@ -2,7 +2,6 @@
 
 import React from "react";
 import { gsap } from "gsap";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BurgerMenu from "./BurgerMenu";
 
@@ -11,7 +10,11 @@ const SOCIAL_ICONS = [
   { link: "https://t.me/+sx2sJHbOFctkZjA0", path: "/logo-tg.svg" },
   { link: "https://mee6.xyz/i/dRO0fQCn5J", path: "/logo-ds.svg" },
 ];
-const NAVIGATION_LINK_TITLES = ["DOCS", "BLOG", "ECOSYSTEM"];
+const NAVIGATION_LINKS = [
+  { title: "DOCS", href: "#docs" },
+  { title: "BLOG", href: "#blog" },
+  { title: "ECOSYSTEM", href: "#ecosystem" },
+];
 
 const Header = () => {
   const pathname = usePathname();
@@ -113,10 +116,10 @@ const Header = () => {
               />
             </a>
             <nav className="hidden md:flex">
-              {NAVIGATION_LINK_TITLES.map((title) => {
+              {NAVIGATION_LINKS.map(({ title, href }) => {
                 return (
                   <a
-                    href="/"
+                    href={href}
                     key={title}
                     className={`
                       group
@@ -220,9 +223,9 @@ const Header = () => {
         <div className="container mx-auto">
           <div className="bg-[#0A0A0A] p-5 shadow-xl">
             <nav className="flex flex-col items-start space-y-3">
-              {NAVIGATION_LINK_TITLES.map((title) => (
-                <Link
-                  href={`/${title.toLowerCase()}`}
+              {NAVIGATION_LINKS.map(({ title, href }) => (
+                <a
+                  href={href}
                   key={title}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`
@@ -231,7 +234,7 @@ const Header = () => {
                   `}
                 >
                   {title}
-                </Link>
+                </a>
               ))}
               <button
                 type="button"

@@ -72,6 +72,7 @@ function LatestSection() {
   );
   return (
     <section
+      id="blog"
       ref={containerRef}
       className="flex justify-center mb-[80px] bg-transparent"
     >

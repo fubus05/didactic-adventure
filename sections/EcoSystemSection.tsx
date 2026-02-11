@@ -82,6 +82,7 @@ const EcoSystemSection = () => {
 
   return (
     <div
+      id="ecosystem"
       ref={containerRef}
       className="bg-transparent max-w-[1300px] mx-auto text-white flex flex-col items-center justify-center md:pt-[188px] pt-[100px] px-4 sm:px-6 lg:px-8 relative"
     >
